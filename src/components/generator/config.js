@@ -9,6 +9,19 @@ export const formConf = {
   gutter: 15,
   disabled: false,
   span: 24,
+  __methods__: {
+    clickTestButton1() {
+      console.log(
+        `%c【测试按钮1】点击事件里可以访问当前表单：
+          1) formModel='formData', 所以this.formData可以拿到当前表单的model
+          2) formRef='elForm', 所以this.$refs.elForm可以拿到当前表单的ref(vue组件)
+        `,
+        'color:#409EFF;font-size: 15px'
+      )
+      console.log('表单的Model：', this.formData)
+      console.log('表单的ref：', this.$refs.elForm)
+    }
+  },
   formBtns: true
 }
 

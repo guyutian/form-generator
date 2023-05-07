@@ -171,6 +171,11 @@ export default {
         if (!Array.isArray(config.regList)) {
           config.regList = []
         }
+        // debugger
+        if (config.onlyOne) {
+          const required = { validator: this.validateTest, trigger: 'blur' }
+          config.regList.push(required)
+        }
         if (config.required) {
           const required = { required: config.required, message: cur.placeholder }
           if (Array.isArray(config.defaultValue)) {
@@ -187,6 +192,15 @@ export default {
         })
         if (config.children) this.buildRules(config.children, rules)
       })
+    },
+    validateTest(rule, value, callback) {
+      console.log('🚀 ~ file: Parser.vue:197 ~ validateTest ~ rule:', rule)
+      console.log('run customer validate')
+      if (value === '1227') {
+        callback()
+      } else {
+        callback(new Error('请正确输入！'))
+      }
     },
     resetForm() {
       this.formConfCopy = deepClone(this.formConf)

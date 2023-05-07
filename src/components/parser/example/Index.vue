@@ -1,6 +1,6 @@
 <template>
   <div class="test-form">
-    <parser :form-conf="formConf" @submit="sumbitForm1" />
+    <!-- <parser :form-conf="formConf3" @submit="sumbitForm1" /> -->
     <parser :key="key2" :form-conf="formConf" @submit="sumbitForm2" />
     <el-button @click="change">
       change
@@ -40,6 +40,7 @@ export default {
               tag: 'el-input',
               tagIcon: 'input',
               required: true,
+              onlyOne: true,
               layout: 'colFormItem',
               span: 24,
               document: 'https://element.eleme.cn/#/zh-CN/component/input',
@@ -247,6 +248,62 @@ export default {
         span: 24,
         formBtns: true,
         unFocusedComponentBorder: false
+      },
+      formConf3: {
+        fields: [{
+          __config__: {
+            label: '多选框组',
+            formFields: 'SECRET_LEVEL',
+            tag: 'el-checkbox-group',
+            tagIcon: 'checkbox',
+            defaultValue: '1,2',
+            dataType: 'static',
+            selectComp: null,
+            selectParam: {
+              param: [],
+              sqlParam: {},
+              reportParam: {}
+            },
+            span: 24,
+            showLabel: true,
+            labelWidth: null,
+            layout: 'colFormItem',
+            optionType: 'default',
+            required: true,
+            regList: [],
+            changeTag: true,
+            document: 'https://element.eleme.cn/#/zh-CN/component/checkbox',
+            formId: '1682487238999',
+            renderKey: '16824872389991682487238999'
+          },
+          __slot__: {
+            options: [{
+              label: '选项一',
+              value: 1
+            }, {
+              label: '选项二',
+              value: 2
+            }]
+          },
+          style: {},
+          size: 'medium',
+          min: null,
+          max: 2,
+          disabled: false,
+          type: 'text',
+          __vModel__: 'SECRET_LEVEL'
+        }],
+        formRef: 'elForm',
+        formModel: 'FormModel',
+        formDataBase: '3570b0db867ccfdb0e68271fbd76bb3a',
+        size: 'small',
+        labelPosition: 'right',
+        labelWidth: 100,
+        formRules: 'FormRules',
+        gutter: 10,
+        disabled: false,
+        span: 24,
+        formBtns: true
       }
     }
   },

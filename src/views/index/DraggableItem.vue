@@ -19,9 +19,28 @@ const components = {
     ]
   }
 }
+function setValue(event, config, scheme) {
+  this.$set(config, 'defaultValue', event)
+  this.$set(this[this.formConf.formModel], scheme.__vModel__, event)
+}
+function buildListeners(scheme) {
+  const config = scheme.__config__
+  const methods = this.formConf.__methods__ || {}
+  const listeners = {}
+
+  // 给__methods__中的方法绑定this和event
+  Object.keys(methods).forEach(key => {
+    listeners[key] = event => methods[key].call(this, event)
+  })
+  // 响应 render.js 中的 vModel $emit('input', val)
+  listeners.input = event => setValue.call(this, event, config, scheme)
+
+  return listeners
+}
 const layouts = {
   colFormItem(h, element, index, parent) {
     const { activeItem } = this.$listeners
+    const listeners = buildListeners.call(this, element)
     const config = element.__config__
     let className = this.activeId === config.formId ? 'drawing-item active-from-item' : 'drawing-item'
     if (this.formConf.unFocusedComponentBorder) className += ' unfocus-bordered'
@@ -32,7 +51,7 @@ const layouts = {
         nativeOnClick={event => { activeItem(element); event.stopPropagation() }}>
         <el-form-item label-width={labelWidth}
           label={config.showLabel ? config.label : ''} required={config.required}>
-          <render key={config.renderKey} conf={element} onInput={ event => {
+          <render key={config.renderKey} on={listeners} conf={element} onInput={ event => {
             this.$set(config, 'defaultValue', event)
           }} />
         </el-form-item>
