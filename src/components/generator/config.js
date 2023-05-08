@@ -414,9 +414,12 @@ export const selectComponents = [
     },
     placeholder: '请选择',
     type: 'date',
+    usableStart: '',
+    usableEnd: '',
     style: { width: '100%' },
     disabled: false,
     clearable: true,
+    pickerOptions: 'pickerOptions',
     format: 'yyyy-MM-dd',
     'value-format': 'yyyy-MM-dd',
     readonly: false

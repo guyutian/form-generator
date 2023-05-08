@@ -51,6 +51,23 @@ function buildDataObject(confClone, dataObject) {
     const val = confClone[key]
     if (key === '__vModel__') {
       vModel.call(this, dataObject, confClone.__config__.defaultValue)
+    } else if (key === 'pickerOptions') {
+      const startTime = confClone.usableStart ? new Date(confClone.usableStart).getTime() : ''
+      const endTime = confClone.usableEnd ? new Date(confClone.usableEnd).getTime() : ''
+      dataObject.attrs[key] = {
+        disabledDate(time) {
+          if (startTime && endTime) {
+            return time.getTime() < startTime || time.getTime() > endTime
+          }
+          if (startTime && !endTime) {
+            return time.getTime() < startTime
+          }
+          if (!startTime && endTime) {
+            return time.getTime() > endTime
+          }
+          return false
+        }
+      }
     } else if (dataObject[key]) {
       dataObject[key] = { ...dataObject[key], ...val }
     } else {

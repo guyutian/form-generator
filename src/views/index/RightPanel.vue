@@ -295,6 +295,20 @@
               placeholder="请输入时间段"
             />
           </el-form-item>
+          <el-form-item v-if="activeData.usableStart !== undefined" label="可选开始时间">
+            <el-date-picker
+              v-model="activeData.usableStart"
+              type="date"
+              placeholder="选择日期"
+            />
+          </el-form-item>
+          <el-form-item v-if="activeData.usableEnd !== undefined" label="可选结束时间">
+            <el-date-picker
+              v-model="activeData.usableEnd"
+              type="date"
+              placeholder="选择日期"
+            />
+          </el-form-item>
           <el-form-item v-if="activeData.format !== undefined" label="时间格式">
             <el-input
               :value="activeData.format"

@@ -1,7 +1,7 @@
 <template>
   <div class="test-form">
-    <!-- <parser :form-conf="formConf3" @submit="sumbitForm1" /> -->
-    <parser :key="key2" :form-conf="formConf" @submit="sumbitForm2" />
+    <parser :form-conf="formConf3" @submit="sumbitForm1" />
+    <!-- <parser :key="key2" :form-conf="formConf" @submit="sumbitForm2" /> -->
     <el-button @click="change">
       change
     </el-button>
@@ -177,6 +177,7 @@ export default {
           clickTestButton1() {
             console.log(
               `%c【测试按钮1】点击事件里可以访问当前表单：
+                呀呼嘿
                 1) formModel='formData', 所以this.formData可以拿到当前表单的model
                 2) formRef='elForm', 所以this.$refs.elForm可以拿到当前表单的ref(vue组件)
               `,
@@ -256,7 +257,7 @@ export default {
             formFields: 'SECRET_LEVEL',
             tag: 'el-checkbox-group',
             tagIcon: 'checkbox',
-            defaultValue: '1,2',
+            defaultValue: [1, 2],
             dataType: 'static',
             selectComp: null,
             selectParam: {
@@ -292,6 +293,39 @@ export default {
           disabled: false,
           type: 'text',
           __vModel__: 'SECRET_LEVEL'
+        },
+        {
+          __config__: {
+            label: '多选框组',
+            tag: 'el-checkbox-group',
+            tagIcon: 'checkbox',
+            defaultValue: '1,2',
+            span: 24,
+            showLabel: true,
+            labelWidth: null,
+            layout: 'colFormItem',
+            optionType: 'default',
+            required: true,
+            regList: [],
+            changeTag: true,
+            border: false,
+            document: 'https://element.eleme.cn/#/zh-CN/component/checkbox',
+            formId: 104,
+            renderKey: '1041682471705368'
+          },
+          __slot__: {
+            options: [{
+              label: '选项一',
+              value: 1
+            }, {
+              label: '选项二',
+              value: 2
+            }]
+          },
+          style: {},
+          size: 'medium',
+          disabled: false,
+          __vModel__: 'field104'
         }],
         formRef: 'elForm',
         formModel: 'FormModel',
