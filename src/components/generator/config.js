@@ -173,6 +173,7 @@ export const selectComponents = [
       tagIcon: 'select',
       layout: 'colFormItem',
       span: 24,
+      checkSecret: false,
       required: true,
       regList: [],
       changeTag: true,

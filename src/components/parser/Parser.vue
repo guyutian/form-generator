@@ -176,6 +176,10 @@ export default {
           const required = { validator: this.validateTest, trigger: 'blur' }
           config.regList.push(required)
         }
+        if (config.checkSecret) {
+          const required = { validator: this.validateSecret, trigger: 'change' }
+          config.regList.push(required)
+        }
         if (config.required) {
           const required = { required: config.required, message: cur.placeholder }
           if (Array.isArray(config.defaultValue)) {
@@ -200,6 +204,17 @@ export default {
         callback()
       } else {
         callback(new Error('请正确输入！'))
+      }
+    },
+    validateSecret(rule, value, callback) {
+      console.log(this.formConfCopy)
+      const config = this.formConfCopy.fields.find(item => item.__vModel__ === rule.field)
+      console.log(this[this.formConf.formModel][config.__config__.secretKey])
+      const verified = this[this.formConf.formModel][config.__config__.secretKey]
+      if (value > verified) {
+        callback(new Error('超过限定的值啦！'))
+      } else {
+        callback()
       }
     },
     resetForm() {

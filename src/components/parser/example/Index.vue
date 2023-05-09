@@ -1,6 +1,6 @@
 <template>
   <div class="test-form">
-    <parser :form-conf="formConf3" @submit="sumbitForm1" />
+    <parser :form-conf="formConf4" @submit="sumbitForm1" />
     <!-- <parser :key="key2" :form-conf="formConf" @submit="sumbitForm2" /> -->
     <el-button @click="change">
       change
@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       key2: +new Date(),
+      // 自定义方法触发
       formConf: {
         fields: [
           {
@@ -199,6 +200,7 @@ export default {
         formBtns: true,
         unFocusedComponentBorder: false
       },
+      // 表单提交
       formConf2: {
         fields: [
           {
@@ -250,6 +252,7 @@ export default {
         formBtns: true,
         unFocusedComponentBorder: false
       },
+      // 多选组默认值不能为字符串，否则会导致被禁用
       formConf3: {
         fields: [{
           __config__: {
@@ -338,7 +341,100 @@ export default {
         disabled: false,
         span: 24,
         formBtns: true
+      },
+      // 多组件关联校验
+      formConf4: {
+        fields: [{
+          __config__: {
+            label: '密级选择',
+            showLabel: true,
+            labelWidth: null,
+            tag: 'el-select',
+            tagIcon: 'select',
+            layout: 'colFormItem',
+            span: 24,
+            checkSecret: false,
+            required: true,
+            regList: [],
+            changeTag: true,
+            document: 'https://element.eleme.cn/#/zh-CN/component/select',
+            formId: 102,
+            renderKey: 1683613357681
+          },
+          __slot__: {
+            options: [{
+              label: '选项一',
+              value: 1
+            }, {
+              label: '选项二',
+              value: 2
+            }, {
+              label: '选项三',
+              value: 3
+            }]
+          },
+          placeholder: '请选择密级选择',
+          style: {
+            width: '100%'
+          },
+          clearable: true,
+          disabled: false,
+          filterable: false,
+          multiple: false,
+          __vModel__: 'secret'
+        }, {
+          __config__: {
+            label: '密级校验',
+            showLabel: true,
+            labelWidth: null,
+            tag: 'el-select',
+            tagIcon: 'select',
+            layout: 'colFormItem',
+            span: 24,
+            checkSecret: true,
+            required: true,
+            regList: [],
+            changeTag: true,
+            document: 'https://element.eleme.cn/#/zh-CN/component/select',
+            formId: 103,
+            renderKey: 1683613838798,
+            secretKey: 'secret'
+          },
+          __slot__: {
+            options: [{
+              label: '选项一',
+              value: 1
+            }, {
+              label: '选项二',
+              value: 2
+            }, {
+              label: '选项三',
+              value: 3
+            }]
+          },
+          placeholder: '请选择密级校验',
+          style: {
+            width: '100%'
+          },
+          clearable: true,
+          disabled: false,
+          filterable: false,
+          multiple: false,
+          __vModel__: 'name'
+        }],
+        formRef: 'elForm',
+        formModel: 'formData',
+        size: 'medium',
+        labelPosition: 'right',
+        labelWidth: 100,
+        formRules: 'rules',
+        gutter: 15,
+        disabled: false,
+        span: 24,
+        __methods__: {},
+        formBtns: true
       }
+
     }
   },
   computed: {},

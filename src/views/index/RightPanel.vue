@@ -91,6 +91,12 @@
               @input="onDefaultValueInput"
             />
           </el-form-item>
+          <el-form-item v-if="activeData.__config__.checkSecret !== undefined" label="校验密级">
+            <el-switch v-model="activeData.__config__.checkSecret" />
+          </el-form-item>
+          <el-form-item v-if="activeData.__config__.checkSecret" label="密级字段">
+            <el-input v-model="activeData.__config__.secretKey" placeholder="请输入密级字段" />
+          </el-form-item>
           <el-form-item v-if="activeData.__config__.tag==='el-checkbox-group'" label="至少应选">
             <el-input-number
               :value="activeData.min"
